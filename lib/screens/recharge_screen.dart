@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:llegaexpress/models/general/login_success_response.dart';
 import 'package:llegaexpress/screens/recharge/paysafecash_load_form.dart';
 import 'package:llegaexpress/screens/recharge/paysafecash_request_form.dart';
+import 'package:llegaexpress/screens/forms/insurance_pay_screen.dart';
 import 'package:llegaexpress/widgets/exit_floating_action_button.dart';
 import 'package:llegaexpress/widgets/option_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -196,8 +197,7 @@ class _RechargeScreenState extends State<RechargeScreen>
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const PaySafeCashRequestForm(),
+                            builder: (context) => const PaySafeCashRequestForm(),
                           ),
                         );
                       },
@@ -205,6 +205,25 @@ class _RechargeScreenState extends State<RechargeScreen>
                   ],
                 ),
                 top: 470,
+                left: (screenWidth - 300) / 2,
+              ),
+              Positioned(
+                child: Column(
+                  children: [
+                    OptionButton(
+                      label: 'Pago Mensual Repatriacion',
+                      onPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const InsurancePayScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                top: 530,
                 left: (screenWidth - 300) / 2,
               ),
             ],

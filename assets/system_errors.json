@@ -261,7 +261,7 @@
   },
   {
     "ErrorCode": 58,
-    "SpanishDescription": "transacciÃ³n no permitida a terminal / declina",
+    "SpanishDescription": "transaccion no permitida a terminal/declinada",
     "EnglishDescription": "transaction not permitted to terminal/decline"
   },
   {

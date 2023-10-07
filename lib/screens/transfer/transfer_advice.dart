@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:llegaexpress/screens/transfer/customer_verify_form.dart';
 import 'package:llegaexpress/screens/transfer/transfer_screen.dart';
+import 'package:llegaexpress/widgets/icon_option.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+_openURL() async {
+  Uri url = Uri.parse('https://www.llega.com/_files/ugd/0e7b55_3d6496ef21fe4c5a99be4e94f1c11242.pdf');
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
+  }
+}
+
+_openURL2() async {
+  Uri url = Uri.parse('https://www.llega.com/_files/ugd/0e7b55_f9c0b139c90a452f842c04e41f33c059.pdf');
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
+  }
+}
 
 class TransferAdvice extends StatefulWidget {
   const TransferAdvice({Key? key}) : super(key: key);
@@ -69,7 +91,7 @@ class _TransferAdviceState extends State<TransferAdvice> {
                       child: SizedBox(
                         width: 180,
                         child: Text(
-                          'REPATRACIÓN',
+                          'REPATRIACIÓN',
                           style: TextStyle(color: Colors.white, fontSize: 12.0),
                         ),
                       ),
@@ -189,32 +211,40 @@ class _TransferAdviceState extends State<TransferAdvice> {
                       top: 260.0,
                       left: 110.0,
                     ),
-                    const Positioned(
-                      child: SizedBox(
-                        width: 180,
-                        child: Text(
-                          '1 QUE ES REPATRIACION',
-                          style: TextStyle(
+                    Positioned(
+                      child: GestureDetector(
+                        onTap: _openURL,
+                        child: SizedBox(
+                          width: 180,
+                          child: Text(
+                            '1 CARTA BIENVENIDA',
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 12.0,
-                              decoration: TextDecoration.underline),
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
                         ),
                       ),
                       top: 300.0,
                       left: 75.0,
                     ),
-                    const Positioned(
-                      child: SizedBox(
-                        width: 180,
-                        child: Text(
-                          '1 CONTRATO DE REPATRIACIÓN',
-                          style: TextStyle(
+                    Positioned(
+                      child: GestureDetector(
+                        onTap: _openURL2,
+                        child: SizedBox(
+                          width: 180,
+                          child: Text(
+                            '2 CONTRATO DE REPATRIACIÓN',
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 12.0,
-                              decoration: TextDecoration.underline),
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
                         ),
                       ),
-                      top: 315.0,
+                      top: 325.0,
                       left: 75.0,
                     ),
                     const Positioned(

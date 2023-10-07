@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:llegaexpress/models/general/login_success_response.dart';
 import 'package:llegaexpress/screens/issue/cancel_account_web_view.dart';
+import 'package:llegaexpress/screens/issue/password_form.dart';
 import 'package:llegaexpress/widgets/option_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -149,6 +150,18 @@ class _AccountScreenState extends State<AccountScreen>
                       margin: const EdgeInsets.only(bottom: 50),
                     ),
                     OptionButton(
+                        label: 'Cambiar PIN de Acceso',
+                        onPress: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                              const PasswordForm(),
+                            ),
+                          );
+                        }),
+                    SizedBox(height: 10.0), // Add vertical spacing here
+                    OptionButton(
                         label: 'Cancelar Cuenta',
                         onPress: () {
                           Navigator.push(
@@ -158,7 +171,7 @@ class _AccountScreenState extends State<AccountScreen>
                                   const CancelAccountWebView(),
                             ),
                           );
-                        })
+                        }),
                   ],
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 ),

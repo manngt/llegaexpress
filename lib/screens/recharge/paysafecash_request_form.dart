@@ -6,8 +6,7 @@ import 'package:llegaexpress/screens/recharge/paysafecash_results.dart';
 import 'package:llegaexpress/services/recharge_services.dart';
 import 'package:llegaexpress/widgets/option_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../services/system_errors.dart';
+import 'package:llegaexpress/services/system_errors.dart';
 
 class PaySafeCashRequestForm extends StatefulWidget {
   const PaySafeCashRequestForm({Key? key}) : super(key: key);

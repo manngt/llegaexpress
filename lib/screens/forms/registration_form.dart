@@ -11,6 +11,16 @@ import 'package:llegaexpress/widgets/option_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+_openURL() async {
+  Uri url = Uri.parse('https://gpspay.io/spa/xcmo/securew/TERMINOS_Y_CONDICIONES_GENERALES_DEL_SISTEMA_GPS.PDF');
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
+  }
+}
+
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({Key? key}) : super(key: key);
 
@@ -27,6 +37,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
   final _mobileNumberController = TextEditingController();
   final _identificationNumberController = TextEditingController();
   final _emailController = TextEditingController();
+  final _cardPIN1Controller = TextEditingController();
+  final _cardPIN2Controller = TextEditingController();
 
   bool isProcessing = false;
   bool isGT = false;
@@ -101,6 +113,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
       _mobileNumberController.text = '';
       _lastNameController.text = '';
       _firstNameController.text = '';
+      _cardPIN1Controller.text = '';
+      _cardPIN2Controller.text = '';
       termsConditionAccepted = false;
     });
   }
@@ -117,7 +131,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
             _emailController.text,
             selectedCountry!.alpha3.toString(),
             selectedDocumentType!.ID.toString(),
-            _identificationNumberController.text)
+            _identificationNumberController.text,
+            _cardPIN1Controller.text,
+            _cardPIN2Controller.text)
         .then((response) => {
               if (response['ErrorCode'] != null)
                 {
@@ -224,7 +240,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             ),
                           ),
                           const SizedBox(
-                            height: 30.0,
+                            height: 40.0,
                           ),
                           Container(
                             child: TextFormField(
@@ -422,6 +438,74 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             padding: const EdgeInsets.only(left: 10.0),
                           ),
                           Container(
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Crea tu PIN de ingreso de 4 digitos *',
+                                  errorStyle: TextStyle(
+                                    fontSize: 8,
+                                  )),
+                              keyboardType: TextInputType.phone,
+                              obscureText: true,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Campo obligatorio';
+                                }
+                                if (value.length < 4) {
+                                  return 'Mínimo 4 caracteres';
+                                }
+                                if (value.length > 4) {
+                                  return 'Máximo 4 caracteres';
+                                }
+                              },
+                              controller: _cardPIN1Controller,
+                            ),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(25.0)),
+                            ),
+                            height: 50.0,
+                            margin: const EdgeInsets.only(bottom: 5.0),
+                            padding: const EdgeInsets.only(left: 10.0),
+                          ),
+                          Container(
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Repetir tu PIN de ingreso *',
+                                  errorStyle: TextStyle(
+                                    fontSize: 8,
+                                  )),
+                              keyboardType: TextInputType.phone,
+                              obscureText: true,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Campo obligatorio';
+                                }
+                                if (value.length < 4) {
+                                  return 'Mínimo 4 caracteres';
+                                }
+                                if (value.length > 4) {
+                                  return 'Máximo 4 caracteres';
+                                }
+                                if (_cardPIN1Controller.text !=
+                                    _cardPIN2Controller.text) {
+                                  return 'PIN de Acceso no coincide';
+                                }
+                              },
+                              controller: _cardPIN2Controller,
+                            ),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(25.0)),
+                            ),
+                            height: 50.0,
+                            margin: const EdgeInsets.only(bottom: 5.0),
+                            padding: const EdgeInsets.only(left: 10.0),
+                          ),
+                          Container(
                             child: Row(
                               children: [
                                 Checkbox(
@@ -432,46 +516,31 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     });
                                   },
                                 ),
-                                Text.rich(TextSpan(children: [
-                                  TextSpan(
-                                      text:
-                                          'Yo acepto los Terminos y \n Condicones del Titular de la Cuenta',
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () async {
-                                          var url = Uri.parse(
-                                              "https://bgipay.me/spa/xcmo/securew/TERMINOS_Y_CONDICIONES_GENERALES_DEL_SISTEMA_GPS.PDF");
-                                          if (isUS) {
-                                            url = Uri.parse(
-                                                "https://n9.cl/83ler");
-                                          }
-                                          if (isGT) {
-                                            url = Uri.parse(
-                                                "https://n9.cl/ft6yy");
-                                          }
-                                          var urlLaunchAble = await canLaunchUrl(
-                                              url); //canLaunch is from url_launcher package
-                                          if (urlLaunchAble) {
-                                            await launchUrl(
-                                                url); //launch is from url_launcher package to launch URL
-                                          } else {
-                                            return;
-                                          }
-                                        },
-                                      style: const TextStyle(
-                                          color: Colors.blueAccent,
-                                          decoration: TextDecoration.underline))
-                                ])),
+                                GestureDetector(
+                                  onTap: _openURL, // Define your _openURL function for handling the tap event
+                                  child: SizedBox(
+                                    width: 200,
+                                    child: Text(
+                                      'Yo acepto los Terminos y \n Condicones del Titular de la Cuenta',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12.0,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                             decoration: const BoxDecoration(
                               color: Color(0xFFEFEFEF),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25.0)),
+                              borderRadius: BorderRadius.all(Radius.circular(25.0)),
                             ),
                             height: 90.0,
                             margin: const EdgeInsets.only(bottom: 5.0),
                             padding: const EdgeInsets.only(left: 10.0),
                           ),
+
                           Visibility(
                             child: OptionButton(
                                 label: 'Registrarse',

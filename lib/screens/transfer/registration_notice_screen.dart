@@ -45,7 +45,7 @@ class _RegistrationNoticeState extends State<RegistrationNotice> {
                     const Positioned(
                       child: SizedBox(
                         child: Text(
-                          '¡Transfier Dinero!',
+                          '¡Transfiere Dinero!',
                           style: TextStyle(color: Colors.white, fontSize: 20.0),
                         ),
                       ),
@@ -56,7 +56,7 @@ class _RegistrationNoticeState extends State<RegistrationNotice> {
                       child: SizedBox(
                         width: 180,
                         child: Text(
-                          'Para mandar dinero la cuenta en Guatemala debe estar registrada en Tigo Money.',
+                          'Para mandar dinero, la cuenta en Guatemala debe estar registrada en Tigo Money.',
                           style: TextStyle(color: Colors.white, fontSize: 12.0),
                         ),
                       ),
@@ -67,7 +67,7 @@ class _RegistrationNoticeState extends State<RegistrationNotice> {
                       child: SizedBox(
                         width: 180,
                         child: Text(
-                          'La transferenica será inmediata y llegará a la aplicación Tigo Money',
+                          'La transferencia será inmediata y llegará a la aplicación Tigo Money',
                           style: TextStyle(color: Colors.white, fontSize: 12.0),
                         ),
                       ),

@@ -66,13 +66,15 @@ class GeneralServices {
       String reqEmail,
       String reqCountryID,
       String reqSINTypeID,
-      String reqSIN) async {
+      String reqSIN,
+      String reqCardPIN1,
+      String reqCardPIN2) async {
     var merchantId = await reqMerchantID();
     var token = await reqToken();
     var baseUrl = await getBaseUrl();
     //Prepare Uri
     var url = Uri.parse(
-        '${baseUrl + ApiResources.registrationUri}?ReqMerchantID=$merchantId&ReqToken=$token&ReqPromotionCode=${dotenv.env['PROMO_CODE']}&ReqFirstName=$reqFirstName&ReqLastName=$reqLastName&ReqMobileNo=$reqMobileNo&ReqEmail=$reqEmail&ReqCountryID=$reqCountryID&ReqSINTypeID=$reqSINTypeID&ReqSIN=$reqSIN');
+        '${baseUrl + ApiResources.registrationUri}?ReqMerchantID=$merchantId&ReqToken=$token&ReqPromotionCode=${dotenv.env['PROMO_CODE']}&ReqFirstName=$reqFirstName&ReqLastName=$reqLastName&ReqMobileNo=$reqMobileNo&ReqEmail=$reqEmail&ReqCountryID=$reqCountryID&ReqSINTypeID=$reqSINTypeID&ReqSIN=$reqSIN&ReqCardPIN1=$reqCardPIN1&ReqCardPIN2=$reqCardPIN2');
     //send get for registration with parameters ReqMerchantID, ReqToken, ReqFirstName, ReqLastName, ReqMobileNo, ReqEmail, ReqCountryID, ReqSINTypeID, ReqSIN
     http.Response response;
     try {

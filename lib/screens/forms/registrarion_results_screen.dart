@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:llegaexpress/models/general/registration_success_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:llegaexpress/widgets/exit_floating_action_button.dart';
 
 class RegistrationResultsScreen extends StatefulWidget {
   final RegistrationSuccessResponse? registrationSuccessResponse;
@@ -105,14 +106,14 @@ class _RegistrationResultsScreenState extends State<RegistrationResultsScreen> {
                     Container(
                       margin: const EdgeInsets.only(left: 10.0),
                       child: const Text(
-                        'Usuario',
+                        'ID Usuario',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(left: 10.0),
                       child: Text(
-                        '${registrationSuccessResponse!.userId}',
+                        '${registrationSuccessResponse!.cHolderId}',
                         style: const TextStyle(color: Color(0xFF0387c4)),
                       ),
                     ),
@@ -139,7 +140,7 @@ class _RegistrationResultsScreenState extends State<RegistrationResultsScreen> {
                     Container(
                       margin: const EdgeInsets.only(left: 10.0),
                       child: const Text(
-                        'ID Usuario',
+                        'No. Celular',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -156,7 +157,7 @@ class _RegistrationResultsScreenState extends State<RegistrationResultsScreen> {
                     Container(
                       margin: const EdgeInsets.only(left: 10.0),
                       child: const Text(
-                        'Contraseña',
+                        'PIN de Acceso',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -175,6 +176,9 @@ class _RegistrationResultsScreenState extends State<RegistrationResultsScreen> {
               ),
             ],
           ),
+        ),
+        floatingActionButton: ExitFloatingActionButton(
+          context: context,
         ),
       ),
     );

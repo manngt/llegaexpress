@@ -241,7 +241,7 @@ class _StartupScreenState extends State<StartupScreen>
                       Text(
                         'Recuperar tu contraseña aquí.',
                         style: TextStyle(
-                          color: Color(0XFF224c96),
+                          color: Color(0XFFBFF8FF),
                         ),
                       )
                     ],

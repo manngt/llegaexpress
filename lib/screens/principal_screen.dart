@@ -129,30 +129,43 @@ class _PrincipalScreenState extends State<PrincipalScreen>
                     children: [
                       Text(
                         clientName.toString().toUpperCase(),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          color: Colors.black87,
+                          fontSize: 24.0, // Change the text size here
+                          fontFamily: 'Roboto', // Change the font family here
+                          fontWeight: FontWeight.bold, // You can also change the font weight
+                          fontStyle: FontStyle.italic, // You can specify italic style
+                        ),
                       ),
                       const SizedBox(
-                        height: 10.0,
+                        height: 20.0,
                       ),
                       userDataLoaded
                           ? Text(
-                              '${cardNo[0]} ' +
-                                  '${cardNo[1]} ' +
-                                  '${cardNo[2]} ' +
-                                  '${cardNo[3]}   ' +
-                                  '${cardNo[4]} ' +
-                                  '${cardNo[5]} ' +
-                                  '${cardNo[6]} ' +
-                                  '${cardNo[7]}   ' +
-                                  '${cardNo[8]} ' +
-                                  '${cardNo[9]} ' +
-                                  '${cardNo[10]} ' +
-                                  '${cardNo[11]}   ' +
-                                  '${cardNo[12]} ' +
-                                  '${cardNo[13]} ' +
-                                  '${cardNo[14]} ' +
-                                  '${cardNo[15]}',
-                            )
+                        '${cardNo[0]} ' +
+                            '${cardNo[1]} ' +
+                            '${cardNo[2]} ' +
+                            '${cardNo[3]}   ' +
+                            '${cardNo[4]} ' +
+                            '${cardNo[5]} ' +
+                            '${cardNo[6]} ' +
+                            '${cardNo[7]}   ' +
+                            '${cardNo[8]} ' +
+                            '${cardNo[9]} ' +
+                            '${cardNo[10]} ' +
+                            '${cardNo[11]}   ' +
+                            '${cardNo[12]} ' +
+                            '${cardNo[13]} ' +
+                            '${cardNo[14]} ' +
+                            '${cardNo[15]}',
+                        style: TextStyle(
+                          color: Colors.black87, // Change the text color here
+                          fontSize: 18.0,     // Change the text size here
+                          fontFamily: 'Roboto', // Change the font family here
+                          fontWeight: FontWeight.bold, // Change the font weight
+                          fontStyle: FontStyle.italic, // Specify italic style if needed
+                        ),
+                      )
                           : const Text(''),
                       const SizedBox(
                         height: 50.0,
@@ -183,13 +196,23 @@ class _PrincipalScreenState extends State<PrincipalScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              'Tu saldo',
-                              style: TextStyle(color: Colors.white),
+                              'TU SALDO',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16.0, // Change the text size here
+                                fontFamily: 'Roboto', // Change the font family here
+                                fontWeight: FontWeight.bold, // You can also change the font weight
+                                fontStyle: FontStyle.italic, // You can specify italic style
+                              ),
                             ),
                             Text(
                               '$currency  $balance',
                               style: const TextStyle(
                                 color: Colors.white,
+                                fontSize: 16.0, // Change the text size here
+                                fontFamily: 'Roboto', // Change the font family here
+                                fontWeight: FontWeight.bold, // You can also change the font weight
+                                fontStyle: FontStyle.italic, // You can specify italic style
                               ),
                             ),
                           ],

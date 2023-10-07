@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:llegaexpress/models/general/authorization_response.dart';
 import 'package:llegaexpress/models/recharge/load_pay_safe_response.dart';
+import 'package:llegaexpress/widgets/cont_floating_action_button.dart';
 
 class PaySafeCashResults extends StatefulWidget {
   final LoadPaySafeResponse loadPaySafeResponse;
@@ -95,6 +96,9 @@ class _PaySafeCashResultsState extends State<PaySafeCashResults> {
               ),
             ],
           ),
+        ),
+        floatingActionButton: ExitFloatingActionButton(
+          context: context,
         ),
       ),
     );

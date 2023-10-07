@@ -6,21 +6,17 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class IdentityCheckScreen extends StatefulWidget {
   final RegistrationSuccessResponse? registrationSuccessResponse;
-  const IdentityCheckScreen(
-      {Key? key, @required this.registrationSuccessResponse})
+  const IdentityCheckScreen({Key? key, this.registrationSuccessResponse})
       : super(key: key);
 
   @override
-  _IdentityCheckScreenState createState() {
-    return _IdentityCheckScreenState(
-        registrationSuccessResponse: this.registrationSuccessResponse);
-  }
+  _IdentityCheckScreenState createState() =>
+      _IdentityCheckScreenState(registrationSuccessResponse: registrationSuccessResponse);
 }
 
 class _IdentityCheckScreenState extends State<IdentityCheckScreen> {
   final RegistrationSuccessResponse? registrationSuccessResponse;
-  _IdentityCheckScreenState(
-      {Key? key, @required this.registrationSuccessResponse});
+  _IdentityCheckScreenState({this.registrationSuccessResponse});
 
   @override
   void initState() {
@@ -29,13 +25,18 @@ class _IdentityCheckScreenState extends State<IdentityCheckScreen> {
   }
 
   @override
+  void dispose() {
+    // Dispose of the WebView to prevent memory leaks
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var url =
-        'https://bgipay.me/spa/xcmo/securew/mati_cproof.asp?CHolderID=${registrationSuccessResponse!.cHolderId}';
+    var url = 'https://test.bgpay.me/spa/xpay/securew/naserpagos.html';
     return Scaffold(
       appBar: AppBar(
         title: const Text('Confirmación de datos'),
-        backgroundColor: const Color(0XFF0E325F),
+        backgroundColor: const Color(0xFF0E325F), // Updated color code
       ),
       body: WebView(
         initialUrl: url,

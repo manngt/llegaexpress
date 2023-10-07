@@ -4,6 +4,7 @@ class TigoTransferResponse {
   double? debitedAmount;
   double? exRate;
   double? transferAmount;
+  String? PolicyNo;
   String? autNo;
 
   TigoTransferResponse(
@@ -12,6 +13,7 @@ class TigoTransferResponse {
       this.debitedAmount,
       this.exRate,
       this.transferAmount,
+      this.PolicyNo,
       this.autNo});
 
   TigoTransferResponse.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class TigoTransferResponse {
         : json['DebitedAmount'];
     exRate = json['ExRate'];
     transferAmount = json['TransferAmount'];
+    PolicyNo = json['PolicyNo'];
     autNo = json['AuthNo'];
   }
 
@@ -32,6 +35,7 @@ class TigoTransferResponse {
     data['DebitedAmount'] = this.debitedAmount;
     data['ExRate'] = this.exRate;
     data['TransferAmount'] = this.transferAmount;
+    data['PolicyNo'] = this.PolicyNo;
     data['AuthNo'] = this.autNo;
     return data;
   }

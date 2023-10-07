@@ -188,7 +188,7 @@ class _TransferTypeSelectionState extends State<TransferTypeSelection> {
                                 _executeTransaction(context);
                               },
                               child: const Text(
-                                'ENVIO SOLO TRANSFERENCIA',
+                                'TRANSFERIR A TIGO-MONEY',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12.0),
                               ),
@@ -203,10 +203,10 @@ class _TransferTypeSelectionState extends State<TransferTypeSelection> {
                             height: 100.0,
                             child: TextButton(
                               onPressed: () {
-                                _executeTransaction(context);
+                                _executeTransactionRep(context);
                               },
                               child: const Text(
-                                'ENVIO TRANSFERENCIA Y PAGO REPATRIACION',
+                                'TRANSFERIR Y PAGAR REPATRIACION',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12.0),
                               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:llegaexpress/models/transfer/tigo_transfer_response.dart';
+import 'package:llegaexpress/widgets/exit_floating_action_button.dart';
 
 class TigoTransferResults extends StatefulWidget {
   final TigoTransferResponse tigoTransferResponse;
@@ -41,11 +42,11 @@ class _TigoTransferResultsState extends State<TigoTransferResults> {
               ),
               SizedBox(
                 height: screenHeight * 0.20,
-                child: Image.asset('images/recarga_exitosa_200x300.png'),
+                child: Image.asset('images/TRASNFERENCIA EXITOSA@200x300.png'),
               ),
               Container(
                 width: screenWidth * 0.90,
-                height: 250,
+                height: 300,
                 decoration: const BoxDecoration(
                     color: Color(0xFF0d2438),
                     borderRadius: BorderRadius.all(Radius.circular(25.0))),
@@ -141,6 +142,23 @@ class _TigoTransferResultsState extends State<TigoTransferResults> {
                         style: const TextStyle(color: Color(0xFF0387c4)),
                       ),
                     ),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 10.0),
+                      child: const Text(
+                        'Poliza Nro',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 10.0),
+                      child: Text(
+                        '${tigoTransferResponse.PolicyNo}',
+                        style: const TextStyle(color: Color(0xFF0387c4)),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -149,6 +167,9 @@ class _TigoTransferResultsState extends State<TigoTransferResults> {
               ),
             ],
           ),
+        ),
+        floatingActionButton: ExitFloatingActionButton(
+          context: context,
         ),
       ),
     );

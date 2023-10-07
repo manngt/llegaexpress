@@ -3,7 +3,7 @@ class RegistrationSuccessResponse {
   int? cHolderId;
   int? cardNo;
   String? userId;
-  int? password;
+  String? password;
   String? authno;
 
   RegistrationSuccessResponse({this.errorCode, this.cHolderId, this.cardNo, this.userId, this.password, this.authno});

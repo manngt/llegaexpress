@@ -248,13 +248,23 @@ class _TransferScreenState extends State<TransferScreen>
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         const Text(
-                                          'Tu saldo',
-                                          style: TextStyle(color: Colors.white),
+                                          'TU SALDO',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.0, // Change the text size here
+                                            fontFamily: 'Roboto', // Change the font family here
+                                            fontWeight: FontWeight.bold, // You can also change the font weight
+                                            fontStyle: FontStyle.italic, // You can specify italic style
+                                          ),
                                         ),
                                         Text(
                                           '$currency  $balance',
                                           style: const TextStyle(
                                             color: Colors.white,
+                                            fontSize: 16.0, // Change the text size here
+                                            fontFamily: 'Roboto', // Change the font family here
+                                            fontWeight: FontWeight.bold, // You can also change the font weight
+                                            fontStyle: FontStyle.italic, // You can specify italic style
                                           ),
                                         ),
                                       ],
