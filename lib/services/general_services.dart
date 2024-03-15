@@ -30,7 +30,7 @@ class GeneralServices {
   }
 
   static Future<dynamic> reqMerchantIDGt() async {
-    var merchantScope = dotenv.env['TEST_MERCHANT_ID_GT']!;
+    var merchantScope = dotenv.env['GT_MERCHANT_ID']!;
 
     return merchantScope;
   }
@@ -42,7 +42,7 @@ class GeneralServices {
   }
 
   static Future<dynamic> reqTokenGT() async {
-    var tokenScope = dotenv.env['TEST_TOKEN_GT']!;
+    var tokenScope = dotenv.env['GT_MERCHANT_TOKEN']!;
 
     return tokenScope;
   }
@@ -54,7 +54,7 @@ class GeneralServices {
   }
 
   static Future<dynamic> getBaseUrlGt() async {
-    var baseUrlScope = dotenv.env['TEST_HOST_YPAYME']!;
+    var baseUrlScope = dotenv.env['GT_BASE_URL']!;
 
     return baseUrlScope;
   }

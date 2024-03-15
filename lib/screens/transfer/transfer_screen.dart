@@ -280,13 +280,20 @@ class _TransferScreenState extends State<TransferScreen>
                               child: TextFormField(
                                 decoration: const InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Número teléfono Guatemala *',
+                                    hintText: 'Número teléfono Guatemala Validado *',
                                     errorStyle: TextStyle(
                                       fontSize: 8,
                                     )),
+                                keyboardType: TextInputType.phone,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Campo obligatorio';
+                                  }
+                                  if (value.length < 8) {
+                                    return 'Mínimo 8 caracteres';
+                                  }
+                                  if (value.length > 8) {
+                                    return 'Máximo 8 caracteres';
                                   }
                                 },
                                 controller: _phoneController,
@@ -303,15 +310,28 @@ class _TransferScreenState extends State<TransferScreen>
                             Container(
                               child: TextFormField(
                                 decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Monto en dolares *',
-                                    errorStyle: TextStyle(
-                                      fontSize: 8,
-                                    )),
+                                  border: InputBorder.none,
+                                  hintText: 'Monto en dólares (Mínimo USD 5.00) *',
+                                  errorStyle: TextStyle(
+                                    fontSize: 8,
+                                  ),
+                                ),
+                                keyboardType: TextInputType.phone,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Campo obligatorio';
                                   }
+                                  // Convert the entered value to a double
+                                  double? amount = double.tryParse(value);
+                                  if (amount == null) {
+                                    return 'Ingrese un número válido';
+                                  }
+                                  // Check if the entered amount is less than 5
+                                  if (amount < 5) {
+                                    return 'El monto debe ser al menos USD 5.00';
+                                  }
+                                  // Validation passed
+                                  return null;
                                 },
                                 controller: _amountController,
                               ),
@@ -357,10 +377,17 @@ class _TransferScreenState extends State<TransferScreen>
                                     fontSize: 8,
                                   ),
                                 ),
+                                keyboardType: TextInputType.phone,
                                 obscureText: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Campo obligatorio';
+                                  }
+                                  if (value.length < 4) {
+                                    return 'Mínimo 4 caracteres';
+                                  }
+                                  if (value.length > 4) {
+                                    return 'Máximo 4 caracteres';
                                   }
                                 },
                                 controller: _pinWebController,

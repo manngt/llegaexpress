@@ -149,7 +149,7 @@ class _PaySafeCashLoadFormState extends State<PaySafeCashLoadForm> {
                             child: TextFormField(
                               decoration: const InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Monto *'),
+                                  hintText: 'Monto * (NO MAYOR de 500.00)'),
                               keyboardType: TextInputType.phone,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {

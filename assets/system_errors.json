@@ -31,7 +31,7 @@
   },
   {
     "ErrorCode": 6,
-    "SpanishDescription": "",
+    "SpanishDescription": "error",
     "EnglishDescription": "error"
   },
   {
@@ -91,8 +91,8 @@
   },
   {
     "ErrorCode": 18,
-    "SpanishDescription": "",
-    "EnglishDescription": "customer dispute"
+    "SpanishDescription": "Documento Invalido",
+    "EnglishDescription": "Invalid ID"
   },
   {
     "ErrorCode": 19,
@@ -101,12 +101,12 @@
   },
   {
     "ErrorCode": 20,
-    "SpanishDescription": "",
-    "EnglishDescription": "invalid response"
+    "SpanishDescription": "Solicitud excede limite diario de cargas",
+    "EnglishDescription": "Request exceeds daily load limit"
   },
   {
     "ErrorCode": 21,
-    "SpanishDescription": "",
+    "SpanishDescription": "No es posible, Intente mas tarde",
     "EnglishDescription": "no action taken"
   },
   {

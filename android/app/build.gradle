@@ -52,7 +52,7 @@ android {
         applicationId "com.llegagt.llegaexpress"
         minSdkVersion 24
         targetSdkVersion 33
-        versionCode flutterVersionCode.toInteger() + 2
+        versionCode flutterVersionCode.toInteger() + 4
         versionName flutterVersionName
     }
 

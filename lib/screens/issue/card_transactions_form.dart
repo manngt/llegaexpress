@@ -133,10 +133,17 @@ class _CardTransactionsFormState extends State<CardTransactionsForm>
                               border: InputBorder.none,
                               hintText: 'Contraseña *',
                             ),
+                            keyboardType: TextInputType.phone,
                             obscureText: true,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Campo obligatorio';
+                              }
+                              if (value.length < 4) {
+                                return 'Mínimo 4 caracteres';
+                              }
+                              if (value.length > 4) {
+                                return 'Máximo 4 caracteres';
                               }
                             },
                             controller: _passwordController,

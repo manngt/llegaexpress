@@ -39,7 +39,7 @@ class _TransactionListState extends State<TransactionList>
     if (countryScope == 'US') {
       setState(() {
         isUS = true;
-        titleApp = 'BGP';
+        titleApp = 'LLEGA';
         currencyApp = 'USD ';
       });
     }
@@ -60,21 +60,35 @@ class _TransactionListState extends State<TransactionList>
         title: Text('Transacciones Cuenta $titleApp'),
         backgroundColor: const Color(0XFF0E325F),
       ),
-      backgroundColor: const Color(0XFFAFBECC),
+      backgroundColor: Colors.transparent, // Make the scaffold background transparent
       body: Builder(
         builder: (context) => SafeArea(
-          child: ListView.builder(
-            padding: EdgeInsets.only(left: 10.0, right: 10.0),
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: transactionList!.transactions!.length,
-            itemBuilder: (context, index) {
-              Transaction transaction = transactionList!.transactions![index];
-              return Container(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                width: 300,
-                child: Column(
-                  children: [
+          child: Stack(
+            children: [
+          // Background image
+          Positioned.fill(
+          child: Image.asset(
+            'images/backgrounds/white_background.png', // Replace with your image path
+            fit: BoxFit.cover,
+          ),
+        ),
+        // Colored container to overlay the background
+        Container(
+          color: const Color(0XFFAFBECC), // Change to your desired background color
+        ),
+        // Existing content
+        ListView.builder(
+          padding: EdgeInsets.only(left: 10.0, right: 10.0),
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: transactionList!.transactions!.length,
+          itemBuilder: (context, index) {
+            Transaction transaction = transactionList!.transactions![index];
+            return Container(
+              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+              width: 300,
+              child: Column(
+                children: [
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,10 +154,12 @@ class _TransactionListState extends State<TransactionList>
                       height: 2.0,
                       color: Colors.white,
                     ),
-                  ],
-                ),
-              );
-            },
+                ],
+              ),
+            );
+          },
+        ),
+            ],
           ),
         ),
       ),

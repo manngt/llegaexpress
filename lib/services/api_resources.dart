@@ -27,7 +27,7 @@ class ApiResources {
   //Visa Cards
   static const String visaCardsUri = 'plastic_card/cards';
 
-  //Card/BGP Transactions
+  //Card/GPS Transactions
   static const String cardTransactionsUri = 'card/tranreport';
 
   //Virtual Card Balance

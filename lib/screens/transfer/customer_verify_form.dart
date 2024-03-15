@@ -112,6 +112,7 @@ class _CustomerVerifyFormState extends State<CustomerVerifyForm> {
                                 'Validar Numero',
                                 style: TextStyle(
                                     color: Color(0xFF0e2338),
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w900),
                               ),
                             ),
@@ -129,9 +130,16 @@ class _CustomerVerifyFormState extends State<CustomerVerifyForm> {
                                     errorStyle: TextStyle(
                                       fontSize: 8,
                                     )),
+                                keyboardType: TextInputType.phone,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Campo obligatorio';
+                                  }
+                                  if (value.length < 8) {
+                                    return 'Mínimo 8 caracteres';
+                                  }
+                                  if (value.length > 8) {
+                                    return 'Máximo 8 caracteres';
                                   }
                                 },
                                 controller: _phoneController,

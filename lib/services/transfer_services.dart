@@ -22,8 +22,8 @@ class TransferServices {
     return merchantScope;
   }
 
-  static Future<dynamic> reqTestGTMerchantID() async {
-    var merchantScope = dotenv.env['TEST_MERCHANT_ID_GT']!;
+  static Future<dynamic> reqMerchantIDGt() async {
+    var merchantScope = dotenv.env['GT_MERCHANT_ID']!;
     return merchantScope;
   }
 
@@ -37,8 +37,8 @@ class TransferServices {
     return tokenScope;
   }
 
-  static Future<dynamic> reqTestToken() async {
-    var tokenScope = dotenv.env['TEST_TOKEN_GT']!;
+  static Future<dynamic> reqTokenGT() async {
+    var tokenScope = dotenv.env['GT_MERCHANT_TOKEN']!;
     return tokenScope;
   }
 
@@ -52,8 +52,8 @@ class TransferServices {
     return baseUrlScope;
   }
 
-  static Future<dynamic> getYPayMeBaseUrl() async {
-    var baseUrlScope = dotenv.env['TEST_HOST_YPAYME']!;
+  static Future<dynamic> getBaseUrlGt() async {
+    var baseUrlScope = dotenv.env['GT_BASE_URL']!;
     return baseUrlScope;
   }
 
@@ -130,8 +130,8 @@ class TransferServices {
 
   static Future<dynamic> getCardPolicyRep(String reqPassword,
       String reqCardNumberTo, String reqStrTotal, String notes) async {
-    var merchantId = await reqTestGTMerchantID();
-    var token = await reqTestToken();
+    var merchantId = await reqMerchantID();
+    var token = await reqToken();
     var baseUrl = await getBaseUrl();
 
     //get CHolderID
@@ -275,7 +275,7 @@ class TransferServices {
   static Future<dynamic> getCustomerVerify(String reqAccessValue) async {
     var merchantId = await reqCustomerVerifyMerchantID();
     var token = await reqCustomerVerifyToken();
-    var baseUrl = await getYPayMeBaseUrl();
+    var baseUrl = await getBaseUrlGt();
     //Prepare Uri
     var url = Uri.parse(
         '${baseUrl + ApiResources.customerVerifyUri}?ReqMerchantID=$merchantId&ReqToken=$token&ReqAccessValue=$reqAccessValue');

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:llegaexpress/screens/recharge_screen.dart';
+import 'package:llegaexpress/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ExitFloatingActionButton extends StatelessWidget {
@@ -23,7 +23,7 @@ class ExitFloatingActionButton extends StatelessWidget {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => const RechargeScreen(),
+        builder: (context) => const LoginScreen(),
       ),
     );
   }

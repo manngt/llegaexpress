@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:llegaexpress/models/transfer/tigo_transfer.dart';
 import 'package:llegaexpress/models/transfer/tigo_transfer_response.dart';
-import 'package:llegaexpress/screens/transfer/foreign_registration_form.dart';
+import 'package:llegaexpress/screens/transfer/transfer_error_form.dart';
 import 'package:llegaexpress/screens/transfer/tigo_transfer_results.dart';
 import 'package:llegaexpress/services/transfer_services.dart';
+
 
 class TransferTypeSelection extends StatefulWidget {
   final TigoTransfer tigoTransfer;
@@ -36,7 +37,9 @@ class _TransferTypeSelectionState extends State<TransferTypeSelection> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const ForeignRegistrationForm(),
+          builder: (context) => TransferErrorForm(
+            errorCode: json['ErrorCode'], // Pass the error code here
+          ),
         ),
       );
     }
@@ -141,10 +144,6 @@ class _TransferTypeSelectionState extends State<TransferTypeSelection> {
                 height: 20.0,
               ),
               SizedBox(
-                width: screenWidth * 0.45,
-                child: Image.asset('images/logos/tigo_money_logo.png'),
-              ),
-              SizedBox(
                 height: screenHeight * 0.20,
                 child: Image.asset('images/logos/llega_logo_azul_300x100.png'),
               ),
@@ -154,19 +153,32 @@ class _TransferTypeSelectionState extends State<TransferTypeSelection> {
                 decoration: const BoxDecoration(
                     color: Color(0xFF0d2438),
                     borderRadius: BorderRadius.all(Radius.circular(25.0))),
-                margin: EdgeInsets.only(
-                    left: screenWidth * 0.10,
-                    right: screenWidth * 0.10,
-                    top: 10.0),
+                margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.10, vertical: 10.0),
                 padding: const EdgeInsets.only(top: 20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 15.0,
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: SizedBox(
+                        height: 25.0,
+                        child: Container(
+                          alignment: Alignment.center,
+
+                          child: Text(
+                            'TRANSFERENCIAS',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      margin: EdgeInsets.symmetric(vertical: 10.0),
                       color: Colors.white,
                       height: 2.0,
                     ),
@@ -178,40 +190,67 @@ class _TransferTypeSelectionState extends State<TransferTypeSelection> {
                         children: [
                           Container(
                             decoration: const BoxDecoration(
-                                color: Colors.greenAccent,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50.0))),
+                              color: Colors.greenAccent,
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                            ),
                             width: 100.0,
                             height: 100.0,
-                            child: TextButton(
-                              onPressed: () {
-                                _executeTransaction(context);
-                              },
-                              child: const Text(
-                                'TRANSFERIR A TIGO-MONEY',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 12.0),
-                              ),
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Visibility(
+                                  visible: !isProcessing,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      _executeTransaction(context);
+                                    },
+                                    child: Image.asset(
+                                      'images/logos/tigo_money_logo.png',
+                                      width: 70.0, // Adjust width as needed
+                                      height: 70.0, // Adjust height as needed
+                                    ),
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: isProcessing,
+                                  child: CircularProgressIndicator(), // Replace with your desired loading spinner widget
+                                ),
+                              ],
                             ),
                           ),
+
                           Container(
                             decoration: const BoxDecoration(
-                                color: Colors.greenAccent,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(59.0))),
+                              color: Colors.greenAccent,
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                            ),
                             width: 100.0,
                             height: 100.0,
-                            child: TextButton(
-                              onPressed: () {
-                                _executeTransactionRep(context);
-                              },
-                              child: const Text(
-                                'TRANSFERIR Y PAGAR REPATRIACION',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 12.0),
-                              ),
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Visibility(
+                                  visible: !isProcessing,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      _executeTransactionRep(context);
+                                    },
+                                    child: const Text(
+                                      'TRANSFERIR Y PAGAR REPATRIACION',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: isProcessing,
+                                  child: CircularProgressIndicator(), // Replace with your desired loading spinner widget
+                                ),
+                              ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     )

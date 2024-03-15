@@ -17,7 +17,7 @@ class InsurancePayScreen extends StatefulWidget {
 
   // Function to open the URL with url_launcher
   _openURL() async {
-    Uri url = Uri.parse('https://test.bgpay.me/spa/xpay/securew/naserpagos.html');
+    Uri url = Uri.parse('https://web.llega.com/spa/xpay/securew/naserpagos.html');
     if (!await launchUrl(
       url,
       mode: LaunchMode.externalApplication,

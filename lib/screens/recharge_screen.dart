@@ -65,7 +65,7 @@ class _RechargeScreenState extends State<RechargeScreen>
 
   _openURL() async {
     Uri url = Uri.parse(
-        'https://test.bgpay.me/codigos/paysafe/${cHolderID}_codigo.pdf');
+        'https://web.llega.com/codigos/paysafe/${cHolderID}_codigo.pdf');
     http.Response response;
     try {
       response = await http.get(url, headers: {
@@ -150,9 +150,9 @@ class _RechargeScreenState extends State<RechargeScreen>
               Positioned(
                 child: SizedBox(
                   width: 350.0,
-                  child: Image.asset('images/paysafe_banner500x400.png'),
+                  child: Image.asset('images/paysafe_banner500x200.png'),
                 ),
-                top: 100.0,
+                top: 130.0,
                 left: (screenWidth - 350.0) / 2,
               ),
               Positioned(
@@ -171,7 +171,7 @@ class _RechargeScreenState extends State<RechargeScreen>
                     ),
                   ],
                 ),
-                top: 350,
+                top: 300,
                 left: (screenWidth - 300) / 2,
               ),
               Positioned(
@@ -185,7 +185,7 @@ class _RechargeScreenState extends State<RechargeScreen>
                     ),
                   ],
                 ),
-                top: 410.0,
+                top: 360.0,
                 left: (screenWidth - 300) / 2,
               ),
               Positioned(
@@ -204,7 +204,7 @@ class _RechargeScreenState extends State<RechargeScreen>
                     ),
                   ],
                 ),
-                top: 470,
+                top: 420,
                 left: (screenWidth - 300) / 2,
               ),
               Positioned(
@@ -223,8 +223,48 @@ class _RechargeScreenState extends State<RechargeScreen>
                     ),
                   ],
                 ),
-                top: 530,
+                top: 480,
                 left: (screenWidth - 300) / 2,
+              ),
+              Positioned(
+                child: Column(
+                  children: [
+                    Container(
+                      width: 350.0, // Adjust width as needed
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'ALERTA!',
+                            style: TextStyle(
+                              fontSize: 24.0, // Adjust font size according to your preference
+                              fontWeight: FontWeight.bold, // Adjust font weight according to your preference
+                              color: Colors.red, // Add red color to the title
+                            ),
+                          ),
+                          SizedBox(height: 10), // Adjust spacing between title and content
+                          Text(
+                            'Despues de solicitar el Codigo PaySafe, debe esperar un tiempo de hasta 15 minutos antes de oprimir el Boton que dice "Mostrar codigo PaySafe"',
+                            style: TextStyle(
+                              fontSize: 18.0, // Adjust font size according to your preference
+                            ),
+                            textAlign: TextAlign.center, // Align text within the container
+                          ),
+                          SizedBox(height: 10), // Adjust spacing between title and content
+                          Text(
+                            'Despues de canjear el Codigo PaySafe en la tienda, debe oprimir el Boton que dice "Solicitar Deposito"',
+                            style: TextStyle(
+                              fontSize: 18.0, // Adjust font size according to your preference
+                            ),
+                            textAlign: TextAlign.center, // Align text within the container
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                top: 550, // Adjust position according to your preference
+                left: (screenWidth - 350) / 2, // Adjust position according to your preference
               ),
             ],
           ),
@@ -235,5 +275,6 @@ class _RechargeScreenState extends State<RechargeScreen>
       ),
       onWillPop: () async => true,
     );
+
   }
 }

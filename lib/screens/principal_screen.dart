@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:llegaexpress/screens/issue/account_screen.dart';
 import 'package:llegaexpress/screens/recharge_screen.dart';
 import 'package:llegaexpress/screens/startup_screen.dart';
@@ -15,14 +16,45 @@ class PrincipalScreen extends StatefulWidget {
   _PrincipalScreenState createState() => _PrincipalScreenState();
 }
 
-class _PrincipalScreenState extends State<PrincipalScreen>
-    with WidgetsBindingObserver {
+class _PrincipalScreenState extends State<PrincipalScreen> with WidgetsBindingObserver {
   String clientName = '';
   String cardNo = '';
   String currency = '';
   String balance = '';
   String userID = '';
   bool userDataLoaded = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addObserver(this);
+    _saveCountryScope();
+    _getUserData();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.paused:
+        _cacheData();
+        break;
+
+      case AppLifecycleState.resumed:
+        _retrieveCachedData();
+        break;
+
+      default:
+        break;
+    }
+  }
 
   _saveCountryScope() async {
     final prefs = await SharedPreferences.getInstance();
@@ -35,12 +67,13 @@ class _PrincipalScreenState extends State<PrincipalScreen>
   _getUserData() async {
     final prefs = await SharedPreferences.getInstance();
     LoginSuccessResponse loginSuccessResponse = LoginSuccessResponse(
-        errorCode: 0,
-        cHolderID: prefs.getInt('cHolderID'),
-        userName: prefs.getString('userName'),
-        cardNo: prefs.getString('cardNo'),
-        currency: prefs.getString('currency'),
-        balance: prefs.getString('balance'));
+      errorCode: 0,
+      cHolderID: prefs.getInt('cHolderID'),
+      userName: prefs.getString('userName'),
+      cardNo: prefs.getString('cardNo'),
+      currency: prefs.getString('currency'),
+      balance: prefs.getString('balance'),
+    );
     setState(() {
       clientName = loginSuccessResponse.userName.toString();
       cardNo = loginSuccessResponse.cardNo.toString();
@@ -52,13 +85,35 @@ class _PrincipalScreenState extends State<PrincipalScreen>
     userDataLoaded = true;
   }
 
+  _cacheData() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('clientName', clientName);
+    prefs.setString('cardNo', cardNo);
+    prefs.setString('currency', currency);
+    prefs.setString('balance', balance);
+    prefs.setString('userID', userID);
+  }
+
+  _retrieveCachedData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      clientName = prefs.getString('clientName') ?? '';
+      cardNo = prefs.getString('cardNo') ?? '';
+      currency = prefs.getString('currency') ?? '';
+      balance = prefs.getString('balance') ?? '';
+      userID = prefs.getString('userID') ?? '';
+    });
+  }
+
   _logOut() async {
     final prefs = await SharedPreferences.getInstance();
     Object? nowScanning = prefs.get('isScanning');
     if (nowScanning == false) {
       _cleanPreferences();
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const StartupScreen()));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const StartupScreen()),
+      );
     }
   }
 
@@ -74,37 +129,6 @@ class _PrincipalScreenState extends State<PrincipalScreen>
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-
-    switch (state) {
-      case AppLifecycleState.paused:
-        _logOut();
-        break;
-
-      case AppLifecycleState.resumed:
-        _logOut();
-        break;
-
-      case AppLifecycleState.inactive:
-        _logOut();
-        break;
-
-      case AppLifecycleState.detached:
-        _logOut();
-        break;
-    }
-  }
-
-  @override
-  void initState() {
-    WidgetsBinding.instance!.addObserver(this);
-    _saveCountryScope();
-    _getUserData();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var screenMiddleHeight = MediaQuery.of(context).size.height / 2;
     var screenWidth = MediaQuery.of(context).size.width;
@@ -113,8 +137,7 @@ class _PrincipalScreenState extends State<PrincipalScreen>
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image:
-                AssetImage('images/backgrounds/white_with_log_background.png'),
+            image: AssetImage('images/backgrounds/white_with_log_background.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -160,7 +183,7 @@ class _PrincipalScreenState extends State<PrincipalScreen>
                             '${cardNo[15]}',
                         style: TextStyle(
                           color: Colors.black87, // Change the text color here
-                          fontSize: 18.0,     // Change the text size here
+                          fontSize: 22.0,     // Change the text size here
                           fontFamily: 'Roboto', // Change the font family here
                           fontWeight: FontWeight.bold, // Change the font weight
                           fontStyle: FontStyle.italic, // Specify italic style if needed
@@ -199,7 +222,7 @@ class _PrincipalScreenState extends State<PrincipalScreen>
                               'TU SALDO',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 16.0, // Change the text size here
+                                fontSize: 22.0, // Change the text size here
                                 fontFamily: 'Roboto', // Change the font family here
                                 fontWeight: FontWeight.bold, // You can also change the font weight
                                 fontStyle: FontStyle.italic, // You can specify italic style
@@ -209,7 +232,7 @@ class _PrincipalScreenState extends State<PrincipalScreen>
                               '$currency  $balance',
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 16.0, // Change the text size here
+                                fontSize: 22.0, // Change the text size here
                                 fontFamily: 'Roboto', // Change the font family here
                                 fontWeight: FontWeight.bold, // You can also change the font weight
                                 fontStyle: FontStyle.italic, // You can specify italic style
@@ -267,14 +290,14 @@ class _PrincipalScreenState extends State<PrincipalScreen>
                           child: Column(
                             children: [
                               IconButton(
-                                icon: Image.asset(
-                                    'images/icons/recharge_icon.png'),
+                                icon: Image.asset('images/icons/recharge_icon.png'),
                                 onPressed: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              RechargeScreen()));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => RechargeScreen(),
+                                    ),
+                                  );
                                 },
                                 iconSize: 70,
                               ),
@@ -295,7 +318,7 @@ class _PrincipalScreenState extends State<PrincipalScreen>
                         decoration: const BoxDecoration(
                             color: Color(0xFF0E2238),
                             borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                            BorderRadius.all(Radius.circular(10.0))),
                         height: 130,
                         width: 115,
                       ),
@@ -304,14 +327,12 @@ class _PrincipalScreenState extends State<PrincipalScreen>
                           child: Column(
                             children: [
                               IconButton(
-                                icon: Image.asset(
-                                    'images/icons/transfer_icon.png'),
+                                icon: Image.asset('images/icons/transfer_icon.png'),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          const TransferAdvice(),
+                                      builder: (context) => const TransferAdvice(),
                                     ),
                                   );
                                 },
@@ -334,7 +355,7 @@ class _PrincipalScreenState extends State<PrincipalScreen>
                         decoration: const BoxDecoration(
                             color: Color(0xFF0E2238),
                             borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                            BorderRadius.all(Radius.circular(10.0))),
                         height: 130,
                         width: 115,
                       ),

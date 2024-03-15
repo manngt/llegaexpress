@@ -204,15 +204,8 @@ class _LoginScreenState extends State<LoginScreen> {
     startSesionLabelLeftDistance = (screenWidth - 120) / 2;
 
     return WillPopScope(
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                    'images/backgrounds/blue_triangle_left_background.png'),
-                fit: BoxFit.cover),
-          ),
           child: Scaffold(
-            backgroundColor: Colors.transparent,
+            backgroundColor: Color(0xFF42A5F5),
             key: scaffoldStateKey,
             body: Builder(
               builder: (context) => Form(
@@ -398,7 +391,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-        ),
         onWillPop: () async => true);
   }
 }

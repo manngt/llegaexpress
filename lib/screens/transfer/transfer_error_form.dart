@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:llegaexpress/models/general/authorization_response.dart';
-import 'package:llegaexpress/widgets/exit_floating_action_button.dart';
 
-class PaySafeRequestResults extends StatefulWidget {
-  final AuthorizationResponse authorizationResponse;
-  const PaySafeRequestResults({Key? key, required this.authorizationResponse})
-      : super(key: key);
+class TransferErrorForm extends StatelessWidget {
+  final int errorCode;
 
-  @override
-  _PaySafeRequestResultsState createState() =>
-      _PaySafeRequestResultsState(authorizationResponse: authorizationResponse);
-}
+  TransferErrorForm({
+    required this.errorCode,
+  });
 
-class _PaySafeRequestResultsState extends State<PaySafeRequestResults> {
-  final AuthorizationResponse authorizationResponse;
-  _PaySafeRequestResultsState({Key? key, required this.authorizationResponse});
+  // Define a map of error codes to error messages
+  static Map<int, String> errorMessages = {
+    0: 'No error',
+    14: 'No. de Tarjeta no válido.',
+    13: 'Monto Invalido',
+    16: 'Seleccion Invalida Contrato ya Registrado',
+    15: 'Emisor NO existe/Denegada',
+    20: 'Solicitud excede limite diario de cargas',
+    24: 'El receptor debe terminar afiliacion a TigoMoney',
+    25: 'NO esta autorizado para realizar esta transaccion',
+    51: 'Fondos Insuficientes  / Declinada',
+    // Add more error codes and messages as needed
+  };
+
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
+    String errorMessage = errorMessages.containsKey(errorCode)
+        ? errorMessages[errorCode]!
+        : 'Unknown error';
+
     return Container(
       height: screenHeight,
       width: screenWidth,
@@ -40,10 +50,6 @@ class _PaySafeRequestResultsState extends State<PaySafeRequestResults> {
                 width: screenWidth * 0.45,
                 child: Image.asset('images/logos/llega_logo_azul_300x100.png'),
               ),
-              SizedBox(
-                height: screenHeight * 0.20,
-                child: Image.asset('images/recarga_exitosa_200x300.png'),
-              ),
               Container(
                 width: screenWidth * 0.90,
                 height: 250,
@@ -60,9 +66,10 @@ class _PaySafeRequestResultsState extends State<PaySafeRequestResults> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(left: 10.0),
-                      child: const Text(
-                        'Comprobante de recarga: ',
-                        style: TextStyle(color: Colors.white),
+                      child: Text(
+                        'Error Code: $errorCode',
+                        style: TextStyle(color: Colors.white,
+                            fontSize: 18),
                       ),
                     ),
                     Container(
@@ -71,24 +78,18 @@ class _PaySafeRequestResultsState extends State<PaySafeRequestResults> {
                       height: 2.0,
                     ),
                     Container(
+                      margin: const EdgeInsets.only(left: 10.0),
+                      child: Text(
+                        'Error Message: $errorMessage',
+                        style: const TextStyle(color: Colors.white,
+                            fontSize: 18),
+                      ),
+                    ),
+                    Container(
                       margin: const EdgeInsets.only(bottom: 10.0, left: 10.0),
                       child: Text(
                         '${DateTime.now().toLocal()}',
                         style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 10.0),
-                      child: const Text(
-                        'Autorizacion',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 10.0),
-                      child: Text(
-                        '${authorizationResponse.authNo}',
-                        style: const TextStyle(color: Color(0xFF0387c4)),
                       ),
                     ),
                   ],
@@ -97,13 +98,19 @@ class _PaySafeRequestResultsState extends State<PaySafeRequestResults> {
               const SizedBox(
                 height: 100.0,
               ),
+              ElevatedButton(
+                onPressed: () {
+                  // Add any action you want to perform when the user clicks a button.
+                  // For example, you can navigate back to a previous screen.
+                  Navigator.pop(context);
+                },
+                child: Text('Regresar'),
+              ),
             ],
           ),
-        ),
-        floatingActionButton: ExitFloatingActionButton(
-          context: context,
         ),
       ),
     );
   }
 }
+

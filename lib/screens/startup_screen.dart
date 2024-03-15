@@ -58,7 +58,7 @@ class _StartupScreenState extends State<StartupScreen>
   _openEmail() async {
     final emailLaunchUri = Uri(
         scheme: 'mailto',
-        path: 'info@llegagt.com',
+        path: 'soporte@lacas.org',
         query: encodeQueryParameters(<String, String>{
           'subject': 'Ayuda Email',
         }));
@@ -156,15 +156,8 @@ class _StartupScreenState extends State<StartupScreen>
     powerByBottomDistance = screenHeight - (screenHeight - 10);
 
     return WillPopScope(
-      child: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(
-                  'images/backgrounds/blue_triangle_left_background.png'),
-              fit: BoxFit.cover),
-        ),
         child: Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Color(0xFF42A5F5),
           body: Stack(
             children: [
               Positioned(
@@ -258,7 +251,7 @@ class _StartupScreenState extends State<StartupScreen>
             ],
           ),
         ),
-      ),
+
       onWillPop: () async => false,
     );
   }

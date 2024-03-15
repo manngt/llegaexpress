@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:llegaexpress/models/general/login_success_response.dart';
 import 'package:llegaexpress/screens/issue/cancel_account_web_view.dart';
 import 'package:llegaexpress/screens/issue/password_form.dart';
+import 'package:llegaexpress/screens/issue/card_transactions_form.dart';
 import 'package:llegaexpress/widgets/option_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -160,7 +161,19 @@ class _AccountScreenState extends State<AccountScreen>
                             ),
                           );
                         }),
-                    SizedBox(height: 10.0), // Add vertical spacing here
+                    SizedBox(height: 10.0),
+                    OptionButton(
+                        label: 'Listar Transacciones',
+                        onPress: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                              const CardTransactionsForm(),
+                            ),
+                          );
+                        }),
+                    SizedBox(height: 10.0),// Add vertical spacing here
                     OptionButton(
                         label: 'Cancelar Cuenta',
                         onPress: () {
@@ -177,7 +190,7 @@ class _AccountScreenState extends State<AccountScreen>
                 ),
                 width: 325.0,
               ),
-              top: screenHeight - 500,
+              top: screenHeight - 520,
               left: (screenWidth - 325.0) / 2,
             ),
           ],
